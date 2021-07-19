@@ -55,6 +55,8 @@ class User extends StatelessWidget {
                         return Repo(
                           userName: userName,
                           repoName: 'RepoName',
+                          description:
+                              'Awesome Developer Relations resources curated by the DevRel Collective',
                           watchersCount: 44,
                           forksCount: 32,
                         );

@@ -10,10 +10,12 @@ class Repo extends StatelessWidget {
   Repo(
       {@required this.userName,
       @required this.repoName,
+      @required this.description,
       @required this.watchersCount,
       @required this.forksCount});
   final userName;
   final repoName;
+  final description;
   final watchersCount;
   final forksCount;
 
@@ -35,6 +37,7 @@ class Repo extends StatelessWidget {
                 child: RepoBody(
                   repoName: repoName,
                   watchersCount: watchersCount,
+                  description: description,
                   forksCount: forksCount,
                 ),
               );
@@ -49,8 +52,10 @@ class RepoBody extends StatelessWidget {
   RepoBody(
       {@required this.repoName,
       @required this.watchersCount,
+      @required this.description,
       @required this.forksCount});
   final repoName;
+  final description;
   final watchersCount;
   final forksCount;
 
@@ -65,6 +70,20 @@ class RepoBody extends StatelessWidget {
             Text(
               '$repoName',
               style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
+            ),
+            Visibility(
+              visible: (description != null && description.isNotEmpty),
+              child: Container(
+                  margin:
+                      const EdgeInsets.only(left: 20.0, right: 20.0, top: 10),
+                  child: Text(
+                    '$description',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16,
+                    ),
+                  )),
             ),
             SizedBox(height: 10),
             Column(
