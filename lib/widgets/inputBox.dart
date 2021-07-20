@@ -7,21 +7,11 @@ class InputForm extends StatefulWidget {
   _InputFormState createState() => _InputFormState();
 }
 
-//Input Define a corresponding State class.
-// This class holds the data related to the Form.
 class _InputFormState extends State<InputForm> {
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
-
-  final myController = TextEditingController();
   // Access Value by myController.text
-
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    myController.dispose();
-    super.dispose();
-  }
+  final myController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
