@@ -4,9 +4,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:layout/API/github_api.dart';
-import 'widgets/pages/user.dart';
+import 'widgets/user.dart';
 import 'widgets/inputBox.dart';
-import 'dart:developer';
 
 void main() => runApp(MyApp());
 

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:layout/widgets/pages/repos.dart';
-import 'orgs.dart';
-import 'userProfile.dart';
+import 'pages/userProfile.dart';
 
 class User extends StatelessWidget {
   @override
