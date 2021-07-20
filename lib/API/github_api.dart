@@ -19,18 +19,36 @@ class GitHubApi {
 
   int _next() => 2000 + _random.nextInt(15000);
 
-  Future<List<dynamic>> getUserRepositories(String userLoginId) async =>
-      _request('users/$userLoginId/repos?per_page=250') as List<dynamic>;
+  Future<List<Map<String, dynamic>>> getUserRepositories(
+      String userLoginId) async {
+    List<dynamic> userReposList =
+        await _request('users/$userLoginId/repos?per_page=10');
+    return userReposList
+        .map((user) => Map<String, dynamic>.from(user))
+        .toList();
+  }
 
-  Future<List<dynamic>> getUserOrganisations(String userLoginId) async =>
-      _request('users/$userLoginId/orgs?per_page=250') as List<dynamic>;
+  Future<List<Map<String, dynamic>>> getUserOrganisations(
+      String userLoginId) async {
+    List<dynamic> userOrgsList =
+        await _request('users/$userLoginId/orgs?per_page=250');
+    return userOrgsList.map((user) => Map<String, dynamic>.from(user)).toList();
+  }
 
-  Future<List<dynamic>> getOrganisationsRepositories(String orgLoginId) async =>
-      _request('orgs/$orgLoginId/repos?per_page=250') as List<dynamic>;
+  Future<List<Map<String, dynamic>>> getOrganisationsRepositories(
+      String orgLoginId) async {
+    List<dynamic> orgReposList =
+        await _request('orgs/$orgLoginId/repos?per_page=250');
+    return orgReposList.map((user) => Map<String, dynamic>.from(user)).toList();
+  }
 
-  Future<dynamic> getUserInformation(String userLoginId) async =>
-      _request('users/$userLoginId');
+  Future<Map<String, dynamic>> getUserInformation(String userLoginId) async {
+    var userInfo = await _request('users/$userLoginId');
+    return Map<String, dynamic>.from(userInfo);
+  }
 
-  Future<List<dynamic>> getRandomUsers() async =>
-      _request('users?since=${_next()}') as List<dynamic>;
+  Future<List<Map<String, dynamic>>> getRandomUsers() async {
+    List<dynamic> usersList = await _request('users?since=${_next()}');
+    return usersList.map((user) => Map<String, dynamic>.from(user)).toList();
+  }
 }

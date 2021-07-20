@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:layout/widgets/pages/repos.dart';
 import 'orgs.dart';
+import 'userProfile.dart';
 
 class User extends StatelessWidget {
   @override
-  User(
-      {@required this.userName,
-      @required this.followers,
-      @required this.following,
-      @required this.avatarUrl});
+  User({@required this.userName, @required this.avatarUrl});
   final userName;
-  final followers;
-  final following;
   final avatarUrl;
 
   @override
@@ -21,12 +16,13 @@ class User extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
+            SizedBox(width: 500),
             SizedBox(height: 10),
             Text(
               '$userName',
               style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 20),
             ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: Image.network(
@@ -36,42 +32,19 @@ class User extends StatelessWidget {
                 width: 70,
               ),
             ),
-            SizedBox(height: 10),
-            Column(
-              children: <Widget>[
-                Text('$following following'),
-                SizedBox(height: 4),
-                Text('$followers followers')
-              ],
+            SizedBox(
+              height: 5,
+              width: 120,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                TextButton(
-                  child: const Text('Repositories'),
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute<void>(
-                      builder: (BuildContext context) {
-                        return Repo(
-                          userName: userName,
-                          repoName: 'RepoName',
-                          description:
-                              'Awesome Developer Relations resources curated by the DevRel Collective',
-                          watchersCount: 44,
-                          forksCount: 32,
-                        );
-                      },
-                    ));
+            TextButton(
+              child: const Text('User Profile'),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute<void>(
+                  builder: (BuildContext context) {
+                    return UserProfile(userId: userName);
                   },
-                ),
-                const SizedBox(width: 8),
-                SizedBox(width: 120),
-                TextButton(
-                  child: const Text('Organizations'),
-                  onPressed: () {/* ... */},
-                ),
-                const SizedBox(width: 8),
-              ],
+                ));
+              },
             ),
           ],
         ),
