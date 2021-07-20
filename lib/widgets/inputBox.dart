@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './pages/userProfile.dart';
 
 // Define a custom Form widget.
 class InputForm extends StatefulWidget {
@@ -11,8 +12,10 @@ class InputForm extends StatefulWidget {
 class _InputFormState extends State<InputForm> {
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
+
   final myController = TextEditingController();
   // Access Value by myController.text
+
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
@@ -22,13 +25,38 @@ class _InputFormState extends State<InputForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
+    return Row(children: [
+      Container(
         padding: const EdgeInsets.all(16.0),
+        width: 300,
         child: TextField(
           controller: myController,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Search GitHub User',
+          ),
         ),
       ),
-    );
+      TextButton(
+          child: Text('Search'),
+          onPressed: () {
+            if (myController.text.length > 0) {
+              Navigator.push(context, MaterialPageRoute<void>(
+                builder: (BuildContext context) {
+                  return UserProfile(userId: myController.text);
+                },
+              ));
+            } else {
+              showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const Text('Please enter a valid Username'),
+                  content: const Text(
+                      'Username should be at least 1 character long.'),
+                ),
+              );
+            }
+          })
+    ]);
   }
 }
